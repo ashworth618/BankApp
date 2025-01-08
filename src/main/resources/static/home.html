@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Card Balance Checker</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #f4f4f9;
+        }
+        header {
+            background: #6200ea;
+            color: white;
+            padding: 1rem 0;
+            text-align: center;
+        }
+        main {
+            padding: 2rem;
+            text-align: center;
+        }
+        footer {
+            background: #333;
+            color: white;
+            text-align: center;
+            padding: 1rem 0;
+            position: fixed;
+            bottom: 0;
+            width: 100%;
+        }
+        button {
+            background: #6200ea;
+            color: white;
+            border: none;
+            padding: 0.5rem 1rem;
+            font-size: 1rem;
+            cursor: pointer;
+            border-radius: 5px;
+        }
+        button:hover {
+            background: #3700b3;
+        }
+        input {
+            padding: 0.5rem;
+            font-size: 1rem;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+        }
+    </style>
+</head>
+<body>
+<header>
+    <h1>Card Balance Checker</h1>
+</header>
+<main>
+    <p>Enter your 16-digit card number to check your balance:</p>
+    <input id="cardNumber" type="text" placeholder="Enter card number" maxlength="16" />
+    <button id="checkBalance">Check Balance</button>
+    <p id="balanceDisplay"></p>
+</main>
+<script>
+    const button = document.getElementById('checkBalance');
+    const cardNumberInput = document.getElementById('cardNumber');
+    const balanceDisplay = document.getElementById('balanceDisplay');
+
+    button.addEventListener('click', () => {
+        const cardNumber = cardNumberInput.value;
+<!-- would normally check that card number is all numeric but examples did have alphas -->
+<!-- Use this if all numbers:      if (cardNumber.length !== 16 || isNaN(cardNumber)) {-->
+        if (cardNumber.length !== 16) {
+            balanceDisplay.textContent = "Please enter a valid 16-digit card number.";
+            return;
+        }
+
+        fetch(`http://localhost:8080/accountBalance/${cardNumber}`)
+            .then(response => {
+            if (response.status == 500) {
+                throw new Error('Internal Server Error');
+            }
+            if (response.status == 404) {
+                throw new Error('Account not found');
+            }
+            return response.json()
+            })
+            .then(data => {
+                balanceDisplay.textContent = `Your account balance is $${data.balance}`;
+            })
+            .catch(error => {
+                console.error('Error:', error);
+                if (error.message == "Account not found") {
+                    balanceDisplay.textContent = "The account was not found. Please correct account number and try again.";
+                }
+                if (error.message == "Internal Server Error") {
+                    balanceDisplay.textContent = "There was an error fetching the balance. Please try again later.";
+                }
+            });
+    });
+</script>
+</body>
+</html>
