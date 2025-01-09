@@ -19,7 +19,7 @@ http://localhost:8080/accountBalance/${cardNumber}
 
 You may need to modify these depending on what web/back end server that you use.
 
-**Steps**
+**Steps to run in IntelliJ**
 1. Download the zip file from https://github.com/ashworth618/BankApp/tree/main under the code button.
 2. Unzip the zip file whereever you'd like such as /Documents, then rename the directory from BankApp-main to BankApp.
 3. Start IntelliJ, Open the BankApp directory, and select pom.xml then hit open button. Open as a project when asked.
