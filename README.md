@@ -21,12 +21,11 @@ You may need to modify these depending on what web/back end server that you use.
 
 **Steps**
 1. Download the zip file from https://github.com/ashworth618/BankApp/tree/main under the code button.
-2. Unzip the zip file whereever you'd like such as /Documents, then renmae the directory from BankApp-main to BankApp.
+2. Unzip the zip file whereever you'd like such as /Documents, then rename the directory from BankApp-main to BankApp.
 3. Start IntelliJ, Open the BankApp directory, and select pom.xml then hit open button. Open as a project when asked.
 4. On the run menu select Run... then select edit configuration. Hit the + sign and select application.  CLick on box next to Main class and select click OK.  Enter BankApp in Name and press Run.
-5. Menu-Run-Run BankApp or Ctrl-R.  Wait for the output to show that the BankApp was started.
-6. Back at the prooject window, open src/main/resources/static then left click on home.html.  Select open in-brwoser-pick your favorite browser.
-7. API is runniing and page is up for use.  Enter a PAN of 1234567890123456 to test.
+5. Back at the project frame, open src/main/resources/static then right click on home.html.  Select open in-brwoser-pick your favorite browser.
+6. API is running and page is up for use.  Enter a PAN of 1234567890123456 to test.
 
 **Design**
 
